@@ -83,6 +83,9 @@
     } else {
         echo "";
     }
+    for ($i=0; $i<=1; $i++){
+        echo'jaga kesehatan<3';
+    }
 ?>
     </section>
 </body>
