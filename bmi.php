@@ -83,8 +83,11 @@
     } else {
         echo "";
     }
-    for ($i=0; $i<=1; $i++){
-        echo'jaga kesehatan<3';
+    $list = array('be healthy!', 'eat well.', 'live well.');
+    foreach ($list as $value){
+        echo "$value";
+		echo "<br />";
+    }
     }
 ?>
     </section>
