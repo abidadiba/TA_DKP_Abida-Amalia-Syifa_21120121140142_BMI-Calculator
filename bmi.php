@@ -9,6 +9,7 @@
 </head>
 <body>
     <section class="wrapper">
+
 <?php 
     $errh = $errw = $errg = "";
     $height = $weight = "";
@@ -16,13 +17,13 @@
     
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (empty($_POST['height'])) {
-            $errh = "<span style='color:#ed4337; font-size:17px; display:block'>Height is requried</span>";
+            $errh = "<span style='color:#ed4337; font-size:17px; display:block'>Height is required</span>";
         } else {
             $height = validate($_POST['height']);
         }
     
         if (empty($_POST['weight'])) {
-            $errw = "<span style='color:#ed4337; font-size:17px; display:block'>Weight is requried</span>";
+            $errw = "<span style='color:#ed4337; font-size:17px; display:block'>Weight is required</span>";
         } else {
             $weight = validate($_POST['weight']);
         }
@@ -52,7 +53,7 @@
     </div>
     
     <div class="sec2">
-        <span>Enter Your weight </span>
+        <span>Enter Your Weight </span>
         <input type="text" name="weight" autocomplete="off" placeholder="Kilogram"><?php echo $errw; ?>
     </div>
     
@@ -60,24 +61,51 @@
         <input type="submit" name="submit" value="Check BMI">
         <input type="reset" value="Clear">
     </div>
-    
 </form>
 
 <?php
+class Keadaan {
+    public $con1;
+    public $con2;
+    public $con3;
+
+    function setCon1($under){
+        $this->con1 = $under;
+    }
+    function setCon2($normal){
+        $this->con2 = $normal;
+    }
+    function setCon3($over){
+        $this->con3 = $over;
+    }
+
+    function getCon1(){
+        return $this->con1;
+    }
+    function getCon2(){
+        return $this->con2;
+    }
+    function getCon3(){
+        return $this->con3;
+    }
+}
+$keadaan = new Keadaan();
+$keadaan->setCon1("Low Body Weight");
+$keadaan->setCon2("The Standart of Good Health");
+$keadaan->setCon3("Excess Body Weight");
+
     error_reporting(0);
         echo "<span class='pass'>Your BMI score is : ". number_format($bmipass, 2) ."</span>";
+        echo "<br />";
     if (isset($_POST['submit'])){
         if ($bmipass <= 18.5) {
-            echo "<span style='color:#00203FFF; display:block; margin-top:5px ;margin-right:50px'> Low body weight. You need to gain weight by eating moderately.</span>";?>
+            echo "<span style='color:#00203FFF; display:block; margin-top:5px ;margin-right:50px'>". $keadaan->getCon1() .", You need to gain weight by eating moderately. <span style='color:#00203FFF; display:block; margin-top:5px ;margin-right:50px'></span>";?>
             <?php
         } elseif ($bmipass <= 25) {
-            echo "<span style='color:#00203FFF; display:block; margin-top:5px;margin-right:50px'> The standard of good health.</span>";?>
+            echo "<span style='color:#00203FFF; display:block; margin-top:5px ;margin-right:50px'>". $keadaan->getCon2() ."</span>";?>
             <?php
         } elseif ($bmipass <= 30) {
-            echo "<span style='color:#00203FFF; display:block; margin-top:5px;margin-right:50px'> Excess body weight. Exercise needs to reduce excess weight.</span>";?>
-            <?php
-        } elseif ($bmipass > 35) {
-            echo "<span style='color:#00203FFF; display:block; margin-top:5px;margin-right:50px'> The first stage of obesity. It is necessary to choose food and exercise.</span>";?>
+            echo "<span style='color:#00203FFF; display:block; margin-top:5px ;margin-right:50px'>". $keadaan->getCon3() .", Exercise needs to reduce excess weight.</span>";?>
             <?php
         }
     } else {
@@ -87,7 +115,6 @@
     foreach ($list as $value){
         echo "$value";
 		echo "<br />";
-    }
     }
 ?>
     </section>
